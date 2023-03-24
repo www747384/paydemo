@@ -1,7 +1,5 @@
 package com.xxx.paydemo.bo;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
 
 public class PayResultBo {

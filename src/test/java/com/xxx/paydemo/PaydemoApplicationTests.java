@@ -31,6 +31,9 @@ class PaydemoApplicationTests {
     @Autowired
     private TWalletRecordMapper walletRecordMapper;
 
+    /**
+     * 接口1测试
+     */
     @Test
     void test1() {
 
@@ -50,6 +53,9 @@ class PaydemoApplicationTests {
         }
     }
 
+    /**
+     * 接口2测试
+     */
     @Test
     void test2() {
         String url = "http://127.0.0.1:8081/create/payment";
@@ -84,6 +90,9 @@ class PaydemoApplicationTests {
 
     }
 
+    /**
+     * 接口3测试
+     */
     @Test
     void test3() {
 
@@ -118,6 +127,9 @@ class PaydemoApplicationTests {
 
     }
 
+    /**
+     * 接口4测试
+     */
     @Test
     void test4() {
 
@@ -130,39 +142,6 @@ class PaydemoApplicationTests {
 
         System.out.println(data);
 
-    }
-
-    @Test
-    void contextLoads1() {
-        TWalletRecord walletRecord = walletRecordMapper.selectById(new BigDecimal(1));
-        System.out.println(walletRecord.toString());
-    }
-
-    @Test
-    void contextLoads() {
-        //创建一个代码生成器
-        FastAutoGenerator.create("jdbc:mysql://localhost:3306/paydemo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8", "root", "root")
-                //全局配置(GlobalConfig)
-                .globalConfig(builder -> {
-                    builder.author("张三") // 设置作者，可以写自己名字
-                            .enableSwagger() // 开启 swagger 模式，这个是接口文档生成器，如果开启的话，就还需要导入swagger依赖
-                            .fileOverride() // 覆盖已生成文件
-                            .outputDir("D://"); // 指定输出目录，一般指定到java目录
-                })
-                .packageConfig(builder -> {
-                    builder.parent("com.xxx.payrecord") // 设置父包名
-                            .moduleName("system") // 设置父包模块名，这里一般不设置
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, "D://")); // 设置mapperXml生成路径，这里是Mapper配置文件的路径，建议使用绝对路径
-                })
-                //策略配置(StrategyConfig)
-                .strategyConfig(builder -> {
-                    builder.addInclude("t_wallet")
-                            .addInclude("t_wallet_record")
-                            .addInclude("t_user")
-                            .addInclude("t_pay_channel");
-                })
-                .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
-                .execute(); //执行以上配置
     }
 
 }
