@@ -145,7 +145,7 @@ public class MyController {
         RespDto respDto = new RespDto();
 
         try {
-            List<TWalletRecord> walletRecords = walletRecords = walletRecordService.selectRecordById(id);
+            List<TWalletRecord> walletRecords = walletRecordService.selectRecordById(id);
             respDto.setData(walletRecords);
         } catch (BizException e) {
             log.error("BizException", e);
