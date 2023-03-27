@@ -11,7 +11,7 @@
  Target Server Version : 50541
  File Encoding         : 65001
 
- Date: 24/03/2023 18:12:25
+ Date: 27/03/2023 19:21:43
 */
 
 SET NAMES utf8mb4;
@@ -91,7 +91,11 @@ CREATE TABLE `t_wallet_record`  (
   `return_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '返回跳转页面',
   `notify_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '支付回调页面',
   `create_time` datetime NOT NULL COMMENT '更改时间',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `wallet_id`(`wallet_id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `t_wallet` (`wallet_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
