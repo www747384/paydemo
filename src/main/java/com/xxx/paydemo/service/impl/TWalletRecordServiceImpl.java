@@ -122,6 +122,11 @@ public class TWalletRecordServiceImpl implements ITWalletRecordService {
     @Transactional
     public synchronized RefundRespData doRefund(UnifiedRefundDto unifiedRefundDto) throws BizException {
 
+        IStrategyService iStrategyPayService = PayFactory.getByPayWay(unifiedRefundDto.getPaychannel());
+        if (ObjectUtils.isEmpty(iStrategyPayService)) {
+            throw new BizException("暂不支持此支付方式");
+        }
+
         TWalletRecord walletRecord = walletRecordMapper.selectById(unifiedRefundDto.getRecordId());
         if (ObjectUtils.isEmpty(walletRecord)) {
             throw new BizException("该笔交易不存在");
@@ -132,6 +137,11 @@ public class TWalletRecordServiceImpl implements ITWalletRecordService {
         TWallet tWallet = walletMapper.selectOne(walletQueryWrapper);
         if (ObjectUtils.isEmpty(tWallet)) {
             throw new BizException("钱包不存在");
+        }
+
+        RefundRespData refundRespData = iStrategyPayService.toRefund(walletRecord);
+        if (refundRespData.getFund_change().equals("N")) {
+            throw new BizException("退款失败");
         }
 
         walletRecord.setId(null);
@@ -148,12 +158,6 @@ public class TWalletRecordServiceImpl implements ITWalletRecordService {
         updateWrapper.set(TWallet::getUpdateTime, LocalDateTime.now());
         updateWrapper.eq(TWallet::getWalletId, unifiedRefundDto.getWalletId());
         walletMapper.update(tWallet, updateWrapper);
-
-        IStrategyService iStrategyPayService = PayFactory.getByPayWay(unifiedRefundDto.getPaychannel());
-        if (ObjectUtils.isEmpty(iStrategyPayService)) {
-            throw new BizException("暂不支持此支付方式");
-        }
-        RefundRespData refundRespData = iStrategyPayService.toRefund(walletRecord);
 
         return refundRespData;
 

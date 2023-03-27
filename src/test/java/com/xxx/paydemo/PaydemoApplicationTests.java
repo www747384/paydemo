@@ -121,7 +121,7 @@ class PaydemoApplicationTests {
         JSONObject object = JSON.parseObject(str);
         JSONObject data = object.getJSONObject("data");
 
-        if (data.getString("fund_change").equals("Y")) {
+        if (data != null && data.getString("fund_change").equals("Y")) {
             System.out.println(data.getString("refund_amount") + "退款成功");
         } else {
             System.out.println(str);
