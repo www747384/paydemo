@@ -140,7 +140,7 @@ public class TWalletRecordServiceImpl implements ITWalletRecordService {
         }
 
         RefundRespData refundRespData = iStrategyPayService.toRefund(walletRecord);
-        if (refundRespData.getFund_change().equals("N")) {
+        if (!refundRespData.getFund_change().equals("Y")) {
             throw new BizException("退款失败");
         }
 
