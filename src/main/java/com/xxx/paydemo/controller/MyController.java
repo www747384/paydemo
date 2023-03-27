@@ -13,22 +13,17 @@ import com.xxx.paydemo.dto.resp.WalletRespDto;
 import com.xxx.paydemo.entity.TUser;
 import com.xxx.paydemo.entity.TWallet;
 import com.xxx.paydemo.entity.TWalletRecord;
-import com.xxx.paydemo.enums.PayWayEnum;
-import com.xxx.paydemo.enums.SignTypeEnum;
 import com.xxx.paydemo.enums.StatusEnum;
 import com.xxx.paydemo.exception.BizException;
 import com.xxx.paydemo.service.ITUserService;
 import com.xxx.paydemo.service.ITWalletRecordService;
 import com.xxx.paydemo.service.ITWalletService;
-import com.xxx.paydemo.utils.SignUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -144,7 +139,7 @@ public class MyController {
         return respDto;
     }
 
-    @GetMapping("/create/payment")
+    @GetMapping("/fund/record")
     public RespDto<List<TWalletRecord>> unifiedPayment(@RequestParam(value = "id") Long id) {
 
         RespDto respDto = new RespDto();

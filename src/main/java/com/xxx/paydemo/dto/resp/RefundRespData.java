@@ -20,9 +20,9 @@ public class RefundRespData {
     private Long id;
 
     //退款金额
-    private BigDecimal refundAmount;
+    private BigDecimal refund_amount;
 
     //退款返回结果 Y 成功 N 失败
-    private String fundChange = "N";
+    private String fund_change = "N";
 
 }

@@ -51,6 +51,7 @@ class PaydemoApplicationTests {
         } else {
             System.out.println(str);
         }
+
     }
 
     /**
@@ -58,6 +59,7 @@ class PaydemoApplicationTests {
      */
     @Test
     void test2() {
+
         String url = "http://127.0.0.1:8081/create/payment";
 
         UnifiedPaymentDto paymentDto = new UnifiedPaymentDto();
@@ -119,8 +121,8 @@ class PaydemoApplicationTests {
         JSONObject object = JSON.parseObject(str);
         JSONObject data = object.getJSONObject("data");
 
-        if (data.getString("fundChange").equals("Y")) {
-            System.out.println(data.getString("refundAmount") + "退款成功");
+        if (data.getString("fund_change").equals("Y")) {
+            System.out.println(data.getString("refund_amount") + "退款成功");
         } else {
             System.out.println(str);
         }
@@ -133,7 +135,7 @@ class PaydemoApplicationTests {
     @Test
     void test4() {
 
-        String url = "http://127.0.0.1:8081/create/payment?id=" + 1;
+        String url = "http://127.0.0.1:8081/fund/record?id=" + 1;
 
         String str = restTemplate.getForObject(url, String.class);
 

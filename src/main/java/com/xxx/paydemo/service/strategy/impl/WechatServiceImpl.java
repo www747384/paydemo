@@ -38,8 +38,8 @@ public class WechatServiceImpl implements IStrategyService, InitializingBean {
     public RefundRespData toRefund(TWalletRecord walletRecord) {
         RefundRespData refundRespData = new RefundRespData();
         refundRespData.setId(walletRecord.getId());
-        refundRespData.setRefundAmount(walletRecord.getAmt());
-        refundRespData.setFundChange("Y");
+        refundRespData.setRefund_amount(walletRecord.getAmt());
+        refundRespData.setFund_change("Y");
         return refundRespData;
     }
 
